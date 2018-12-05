@@ -1,0 +1,357 @@
+@import "../libs/bootstrap/scss/bootstrap";
+
+@font-face
+    font-family: "ChunkFive Roman";
+    src : url("../fonts/chunkfive.ttf");
+@font-face
+    font-family: "Lato";
+    src : url("../fonts/Lato-Regular.ttf");
+
+$bg_color: #00FFE4; 
+$bg_color2: #F2FEFE;
+$bg_color3: #F4F9FC;
+$font_chunk: 'ChunkFive Roman', arial;
+$link_nav: white; 
+$btn_border_r: 35px;
+$btn_padding: 20px 30px;
+$title_end: #01A2A6;
+$title_begin: #29d9c2;
+$txt_color: #878787;
+$link_color: #999;
+$link_color_hvr: $link_color - #333;
+$inp_border_color: #ddd;
+$padd_edge: 100px;
+$padd_top: 60px;
+$bg_yellow: #FFFFA6;
+$tb_indent: 25px;
+
+=block($bg_color, $top, $bottom)
+	padding-top: $top;
+	padding-right: $padd_edge;
+	padding-bottom: $bottom;
+	padding-left: $padd_edge;
+	background-color: $bg_color;
+
+=text_center($color)
+	color: $color;
+	text-align: center;
+	width: 100%;
+
+=btn_round($bg_color, $color, $border, $outline, $border_r)
+	background-color: $bg_color; 
+	color: $color;
+	border: $border; 
+	outline: $outline;
+	border-radius: $border_r;
+	padding: $btn_padding;
+	cursor: pointer;
+
+=title($f_size, $f_color)
+	font:
+		size: $f_size;
+		family: $font_chunk;
+	color: $f_color;
+	margin-bottom: 40px;
+	@content;
+
+=text($f_size, $f_color)
+	font:
+		size: $f_size;
+	color: $f_color;
+
+=placeholder 
+  &::-webkit-input-placeholder 
+  	@content;
+  &:-moz-placeholder           
+  	@content;
+  &::-moz-placeholder          
+  	@content;
+  &:-ms-input-placeholder
+  	@content;  
+
+=triangle($direction, $color: currentcolor, $size: 1em)
+	$size: $size/2;
+	$transparent: rgba($color, 0);
+	$opposite: (top:bottom, right:left, left:right, bottom:top);
+
+	content: '';
+	display: inline-block;
+	width: 0;
+	height: 0;
+	border: $size solid $transparent;
+	border-#{map-get($opposite, $direction)}-color: $color;
+	margin-#{$direction}: -$size;
+
+html, body
+	overflow-x: hidden;
+
+a, .page-link 
+	color: $link_color;
+	height: 30px;
+	&:hover
+		color: $link_color_hvr;
+		text-decoration: none;
+
+.toplink
+	a 
+		font:
+			weight: 600px;
+			size: 16px;
+		span
+			color: $link_color_hvr;
+
+img 
+	padding: 0;
+	margin: 0;
+
+body
+	font:
+		family: 'Lato', arial;
+		size: 14px;
+	header
+		overflow: hidden;
+		background-color: $bg_color;
+		nav 
+			padding: 50px $padd_edge 10px $padd_edge;
+			.logo
+				width: 150px;
+			.nav 
+				> li 
+					margin-left: 10px;
+					background: inherit;
+					> a 
+						+btn_round($bg_color, $link_nav, none, none, $btn_border_r);
+						box-shadow: 0 0 0 2px $bg_color;
+				> li:hover > a
+					box-shadow: 0 0 0 2px $link_nav;
+			.user_face
+				width: 35px;
+			.arrow 
+				margin-left: 3px;
+			.user_menu:hover
+				text-decoration: none;
+		.header
+			height: 505px;
+			width: 100%;
+			background: url(../img/header.png) no-repeat center;
+			background-size: 100% 100%;
+			.header__hill
+				background: url(../img/hill.png) no-repeat 155% 100%;
+				width: 100%;
+				height: 185px;
+				position: relative;
+				top: 40px;
+				z-index: 2;
+			.header__field
+				background: url(../img/field.png) no-repeat center;
+				background-size: 100% 100%;
+				width: 100%;
+				height: 125px;
+				position: relative;
+				top: -$padd_edge;
+				z-index: 3;
+
+main 				
+	.block1 
+		+block($link_nav, $padd_top, $padd_top);
+		.header__text
+			color: $link_color;
+	.block2 
+		+block($bg_color2, $padd_top, 15px);
+	.block_in
+		margin: $tb_indent 0 $tb_indent 0;
+		.block_in__2
+			background-color: #F4F9FB;
+			width: 100%;
+			height: 500px;
+			padding-top: 30px;
+			padding-left: 50px;
+	.block3
+		+block(inherit, 0, 15px);
+
+.header_text
+	+text_center($link_nav); 
+	position: relative; 
+	margin-top: 15px;
+	z-index: 1;
+	.header__title
+		padding-left: 17px;
+		+title(64px, $link_nav);
+		span 
+			color: $title_end;
+	.header__text
+		margin-top: -15px;
+		margin-left: 13px;
+		+text(18px, $link_nav);
+	button	
+		+btn_round($bg_yellow, black, none, none, $btn_border_r);
+		margin-top: $tb_indent;
+		margin-left: 17px;
+		font:
+			weight: 900;
+			size: 16px;
+
+.bas_regul a 
+	margin-top: 20px;
+	font-size: 16px;
+	i 
+		font-size: 18px;
+
+.block__image
+	img 
+		width: 480px;
+
+.see_more
+	color: $link_nav;
+	position: absolute;
+	bottom: 0px;
+	right: 20px;
+	&:hover
+		color: $link_nav;
+
+.block__image_closeup
+	padding: 0;
+	height: 500px;
+	img
+		width: 100%;
+		height: 100%;
+	video 
+		width: 100%;
+		height: 500px;
+
+.arr1:after
+	+triangle(left, $bg_color3, 20px);
+	position: relative;
+	top: -52%;
+	float: right;
+
+.arr2:after
+	+triangle(right, $bg_color3, 20px);
+	position: relative;
+	top: -52%;
+	float: left;
+
+.block__article
+	padding-top: 10px;
+
+.article_title
+	+title(48px, $title_begin);
+	span 
+		color: $title_end;
+.article_text
+	+text(16px, $txt_color);
+	line-height: 2;
+	span
+		font:
+			weight: 600;
+.article_title_min
+	padding-top: 20px;
+	+title(30px, $title_begin);
+	span 
+		color: $title_end;
+
+input
+	&[type=search]
+		border-radius: $btn_border_r;
+		border: 1px solid $inp_border_color;
+		padding: 10px 15px;
+		outline: none;
+		+placeholder
+			font:
+				size: 16px;
+				weight: 100;
+				style: italic;
+			color: $inp_border_color;
+
+.pad_right
+	padding-right: 20px;
+
+.pad_left
+	margin-left: 20px;
+
+.page-link
+	border: none;
+	background-color: inherit;
+	font:
+		size: 16px;
+		weight: 600;
+	&:hover
+		outline: none;
+		box-shadow: none;
+	&:active
+		outline: none;
+		box-shadow: none;
+	&:focus
+		outline: none;
+		box-shadow: none;
+
+.page-item
+	background-color: inherit;
+	&:hover
+		border: none;
+		outline: none;
+		box-shadow: none;
+	&:active
+		border: none;
+		outline: none;
+		box-shadow: none;
+	&:focus
+		outline: none;
+		box-shadow: none;
+	&.active 
+		.page-link
+			background-color: inherit;
+			color: $title_end;
+			font: 
+				size: 22px;
+
+.bg_head_tb
+	background: url(../img/head_tb.png)  no-repeat center;
+	background-size: 100% 100%;
+	padding: 20px 0 15px;
+	width: 100%;
+	font:
+		family: $font_chunk;
+		size: 18px;
+	color: $link_nav;
+
+.bg_body_tb
+	background-color: $bg_yellow;
+	width: 100%;
+	padding: $tb_indent 50px 10px;
+	.tb_item
+		color: $title_begin;
+		font: 
+			weight: 600;
+			size: 16px;
+		margin-bottom: $tb_indent;
+		input[type="text"] 
+			margin-bottom: $tb_indent;
+			border: none;
+			background-color: inherit;
+			text-align: right;
+			+placeholder
+				color: $title_begin;
+		.drag
+			border: 3px dashed #E8E897;
+			width: 100%;
+			padding: $tb_indent 0;
+			background-color: #FBF6A3;
+			color: #E3D888;
+			cursor: default;
+
+.p_0
+	padding: 0;
+
+.head_destin
+	padding-top: 20px;
+	color: $title_begin;
+	font:
+		family: $font_chunk;
+	h5:after
+		content: "";
+		display: block;
+		height: 3px;
+		width: 68px;
+		background-color: #29d9c2;
+		margin: 18px auto 30px auto;
