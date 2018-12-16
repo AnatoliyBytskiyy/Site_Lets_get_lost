@@ -1,357 +1,828 @@
-@import "../libs/bootstrap/scss/bootstrap";
+@import "../libs/bootstrap/scss/bootstrap"
 
 @font-face
-    font-family: "ChunkFive Roman";
-    src : url("../fonts/chunkfive.ttf");
+    font-family: "ChunkFive Roman"
+    src : url("../fonts/chunkfive.ttf")
 @font-face
-    font-family: "Lato";
-    src : url("../fonts/Lato-Regular.ttf");
+    font-family: "Lato-Regular"
+    src : url("../fonts/Lato-Regular.ttf")
+@font-face
+    font-family: "Lato-Light"
+    src : url("../fonts/Lato-Light.ttf")
+@font-face
+    font-family: "Lato-Bold"
+    src : url("../fonts/Lato-Bold.ttf")
 
-$bg_color: #00FFE4; 
-$bg_color2: #F2FEFE;
-$bg_color3: #F4F9FC;
-$font_chunk: 'ChunkFive Roman', arial;
-$link_nav: white; 
-$btn_border_r: 35px;
-$btn_padding: 20px 30px;
-$title_end: #01A2A6;
-$title_begin: #29d9c2;
-$txt_color: #878787;
-$link_color: #999;
-$link_color_hvr: $link_color - #333;
-$inp_border_color: #ddd;
-$padd_edge: 100px;
-$padd_top: 60px;
-$bg_yellow: #FFFFA6;
-$tb_indent: 25px;
+$bg_color: #00FFE4 
+$bg_color2: #F2FEFE
+$bg_color3: #F4F9FC
+$font_chunk: 'ChunkFive Roman', arial
+$font_lato_r: 'Lato-Regular', arial
+$font_lato_l: 'Lato-Light', arial
+$font_lato_b: 'Lato-Bold', arial
+$link_nav: white 
+$btn_border_r: 35px
+$btn_padding: 20px 30px
+$title_end: #01A2A6
+$title_begin: #29d9c2
+$txt_color: #878787
+$link_color: #999
+$link_color_hvr: $link_color - #333
+$inp_border_color: #ddd
+$inp_color: #aaa
+$padd_edge: 100px
+$padd_top: 60px
+$bg_yellow: #FFFFA6
+$tb_indent: 25px
+$green_clr: #C3F37F
+$map_height: 580px
+$footer_text: #777
+$text_size: 14px
+$link_size: 16px
+
+///////////////LG///////////////////////////
+$btn_padding_lg: 30px 40px
+$padd_edge_lg: 140px
+$text_size_lg: 20px
+$btn_border_r_lg: 50px
+
+///////////////LG+///////////////////////////
+$text_size_lgg: 1.3em
+$text_input_lgg: 1.1em
+$title_size_lgg: 5em
+$padd_edge_lgg: 180px
+$btn_padding_lgg: 35px 50px
+$tb_indent_lgg: 80px
 
 =block($bg_color, $top, $bottom)
-	padding-top: $top;
-	padding-right: $padd_edge;
-	padding-bottom: $bottom;
-	padding-left: $padd_edge;
-	background-color: $bg_color;
+	padding-top: $top
+	padding-right: $padd_edge
+	padding-bottom: $bottom
+	padding-left: $padd_edge
+	background-color: $bg_color
 
 =text_center($color)
-	color: $color;
-	text-align: center;
-	width: 100%;
+	color: $color
+	text-align: center
+	width: 100%
 
 =btn_round($bg_color, $color, $border, $outline, $border_r)
-	background-color: $bg_color; 
-	color: $color;
-	border: $border; 
-	outline: $outline;
-	border-radius: $border_r;
-	padding: $btn_padding;
-	cursor: pointer;
+	background-color: $bg_color 
+	color: $color
+	border: $border 
+	outline: $outline
+	border-radius: $border_r
+	padding: $btn_padding
+	cursor: pointer
+	box-shadow: none
+	&:hover
+		background-color: $bg_color - #005
+		color: $color
+	&:active
+		box-shadow: none
+		outline: none
+	&:focus
+		box-shadow: none
+		outline: none
 
 =title($f_size, $f_color)
 	font:
-		size: $f_size;
-		family: $font_chunk;
-	color: $f_color;
-	margin-bottom: 40px;
-	@content;
+		size: $f_size
+		family: $font_chunk
+	color: $f_color
+	margin-bottom: 40px
+	@content
 
 =text($f_size, $f_color)
 	font:
-		size: $f_size;
-	color: $f_color;
+		size: $f_size
+	color: $f_color
 
 =placeholder 
   &::-webkit-input-placeholder 
-  	@content;
+  	@content
   &:-moz-placeholder           
-  	@content;
+  	@content
   &::-moz-placeholder          
-  	@content;
+  	@content
   &:-ms-input-placeholder
-  	@content;  
+  	@content  
 
 =triangle($direction, $color: currentcolor, $size: 1em)
-	$size: $size/2;
-	$transparent: rgba($color, 0);
-	$opposite: (top:bottom, right:left, left:right, bottom:top);
+	$size: $size/2
+	$transparent: rgba($color, 0)
+	$opposite: (top:bottom, right:left, left:right, bottom:top)
 
-	content: '';
-	display: inline-block;
-	width: 0;
-	height: 0;
-	border: $size solid $transparent;
-	border-#{map-get($opposite, $direction)}-color: $color;
-	margin-#{$direction}: -$size;
+	content: ''
+	display: inline-block
+	width: 0
+	height: 0
+	border: $size solid $transparent
+	border-#{map-get($opposite, $direction)}-color: $color
+	margin-#{$direction}: -$size
+
+=drag($border_clr, $background_clr, $clr, $str)
+	position: relative
+	border: 3px dashed $border_clr
+	width: 100%
+	background-color: $background_clr
+	color: $clr
+	cursor: default
+	height: 80px
+	&:before  
+		display: block
+		padding: $tb_indent 0
+		content: $str
+
+=trans 
+	transition: 0.5s
+	transform: scale(1.1)
 
 html, body
-	overflow-x: hidden;
+	overflow-x: hidden
 
-a, .page-link 
-	color: $link_color;
-	height: 30px;
+a, .page-link
+	color: $link_color
+	height: 30px
+	font-size: $link_size
+	i 
+		font-size: $link_size + 2px
+	@media screen and (min-width: 2000px)
+		font-size: $link_size * 2
 	&:hover
-		color: $link_color_hvr;
-		text-decoration: none;
+		color: $link_color_hvr
+		text-decoration: none
+
+input, textarea
+	font:
+		family: $font_lato_l
+		size: $text_size
+		weight: 100
+		style: italic
+	color: $inp_color
+	+placeholder
+		font:
+			family: $font_lato_l
+			size: $text_size
+			weight: 100
+			style: italic
+		color: $inp_color
+	@media screen and (min-width: 2000px)
+		font:
+			size: $text_input_lgg
+		+placeholder
+			font:
+				size: $text_input_lgg
+
+input[type=search]
+	border-radius: $btn_border_r
+	border: 1px solid $inp_border_color
+	padding: 10px 15px
+	outline: none
+	@media screen and (min-width: 1500px)
+		border-radius: $btn_border_r_lg 
+
+.input_search	
+	i.fa 
+		width: 26px
+		height: 26px
+		line-height: 26px
+		text-align: center
+		margin-right: -26px
+		margin-top: 10px
+		padding-left: 20px
+		position: relative
+		z-index: 1
+		float: left
+		font:
+			size: $text_size
+			weight: 100
+			style: italic
+		color: $inp_color 
+		@media screen and (min-width: 2000px)
+			font:
+				size: $text_input_lgg
+			margin-right: -25px
+			margin-top: 15px
+	i.fa + input 
+		padding-left: 40px
 
 .toplink
-	a 
-		font:
-			weight: 600px;
-			size: 16px;
-		span
-			color: $link_color_hvr;
+	color: $link_color_hvr
 
 img 
-	padding: 0;
-	margin: 0;
+	padding: 0
+	margin: 0
 
 body
 	font:
-		family: 'Lato', arial;
-		size: 14px;
+		family: $font_lato_r
+		size: $text_size
+	@media screen and (min-width: 1500px)
+		font: 
+			size: $text_size_lg 
+	@media screen and (min-width: 2000px)
+		font: 
+			size: $text_size_lgg
 	header
-		overflow: hidden;
-		background-color: $bg_color;
-		nav 
-			padding: 50px $padd_edge 10px $padd_edge;
+		overflow: hidden
+		background-color: $bg_color
+		.header_nav 
+			padding: 50px $padd_edge 10px $padd_edge
+			@media screen and (min-width: 1500px)
+				padding: 50px $padd_edge_lg 20px $padd_edge_lg
+			@media screen and (min-width: 2000px)
+				padding: 50px $padd_edge_lgg 20px $padd_edge_lgg
 			.logo
-				width: 150px;
-			.nav 
-				> li 
-					margin-left: 10px;
-					background: inherit;
-					> a 
-						+btn_round($bg_color, $link_nav, none, none, $btn_border_r);
-						box-shadow: 0 0 0 2px $bg_color;
-				> li:hover > a
-					box-shadow: 0 0 0 2px $link_nav;
+				width: 150px
+				padding-top: 8px
+				@media screen and (min-width: 1500px)
+    				width: 300px
+    				margin-top: -5px
+			li
+				margin-left: 10px
+				background: inherit
+				@media screen and (min-width: 1500px)
+					margin-left: 20px
+				> a 
+					+btn_round(inherit, $link_nav, none, none, $btn_border_r)
+					box-shadow: 0 0 0 2px inherit
+					@media screen and (min-width: 1500px)
+						padding: $btn_padding_lg
+						border-radius: $btn_border_r_lg 
+					@media screen and (min-width: 2000px)
+						adding: $btn_padding_lgg
+			li:hover > a
+				box-shadow: 0 0 0 2px $link_nav
+				background-color: inherit
+				padding: $btn_padding
+				@media screen and (min-width: 1500px)
+					padding: $btn_padding_lg
+					border-radius: $btn_border_r_lg 
 			.user_face
-				width: 35px;
+				width: 35px
 			.arrow 
-				margin-left: 3px;
+				margin-left: 3px
 			.user_menu:hover
-				text-decoration: none;
+				text-decoration: none
 		.header
-			height: 505px;
-			width: 100%;
-			background: url(../img/header.png) no-repeat center;
-			background-size: 100% 100%;
+			height: 505px
+			width: 100%
+			background: url(../img/header.png) no-repeat center
+			background-size: 100% 100%
+			@media screen and (max-width: 576px)
+				height: 399px 
+			@media screen and (min-width: 1500px)
+				height: 584px 
+			@media screen and (min-width: 2000px)
+				height: 820px 
 			.header__hill
-				background: url(../img/hill.png) no-repeat 155% 100%;
-				width: 100%;
-				height: 185px;
-				position: relative;
-				top: 40px;
-				z-index: 2;
+				background: url(../img/hill.png) no-repeat 155% 100%
+				background-size: 100% 100%
+				width: 100%
+				height: 185px
+				position: relative
+				top: 35px
+				left: 30%
+				z-index: 2
+				@media screen and (max-width: 576px)
+					height: 160px 
+					top: 15px
+				@media screen and (min-width: 1500px)
+					height: 330px 
+					top: -15px
+				@media screen and (min-width: 2000px)
+					height: 440px 
+					top: 5px
 			.header__field
-				background: url(../img/field.png) no-repeat center;
-				background-size: 100% 100%;
-				width: 100%;
-				height: 125px;
-				position: relative;
-				top: -$padd_edge;
-				z-index: 3;
+				background: url(../img/field.png) no-repeat center
+				background-size: 100% 100%
+				width: 100%
+				height: 125px
+				position: relative
+				top: -$padd_edge
+				z-index: 3
+				@media screen and (max-width: 576px)
+					top: -100px
+					height: 110px 
+				@media screen and (min-width: 1500px)
+					top: -250px
+					height: 210px
+				@media screen and (min-width: 2000px)
+					top: -340px
+					height: 330px
 
 main 				
 	.block1 
-		+block($link_nav, $padd_top, $padd_top);
+		+block($link_nav, $padd_top, $padd_top)
+		@media screen and (min-width: 1500px)
+			padding: $padd_edge_lg
+		@media screen and (min-width: 2000px)
+			padding: $padd_edge_lgg
 		.header__text
-			color: $link_color;
+			color: $link_color
 	.block2 
-		+block($bg_color2, $padd_top, 15px);
+		+block($bg_color2, $padd_top, 15px)
+		@media screen and (min-width: 1500px)
+			padding: $padd_edge_lg
+		@media screen and (min-width: 2000px)
+			padding: $padd_edge_lgg
 	.block_in
-		margin: $tb_indent 0 $tb_indent 0;
+		margin: $tb_indent 0 $tb_indent 0
+		@media screen and (min-width: 2000px)
+			margin: $tb_indent_lgg 0 $tb_indent_lgg 0
 		.block_in__2
-			background-color: #F4F9FB;
-			width: 100%;
-			height: 500px;
-			padding-top: 30px;
-			padding-left: 50px;
+			background-color: #F4F9FB
+			width: 100%
+			height: 500px
+			padding-top: 30px
+			padding-left: 50px
 	.block3
-		+block(inherit, 0, 15px);
+		+block(inherit, 0, 15px)
+		@media screen and (min-width: 1500px)
+			padding: $padd_edge_lg
+		@media screen and (min-width: 2000px)
+			padding: $padd_edge_lgg
+	.block4
+		+block($green_clr, 25px, 25px)
+		@media screen and (min-width: 1500px)
+			padding: $padd_edge_lg
+		@media screen and (min-width: 2000px)
+			padding: $padd_edge_lgg
+		width: 100%
+		background-image: url("../img/subscribe.png")
+		background-size: 100% 100%
 
 .header_text
-	+text_center($link_nav); 
-	position: relative; 
-	margin-top: 15px;
-	z-index: 1;
+	+text_center($link_nav) 
+	position: relative 
+	margin-top: 15px
+	z-index: 1
 	.header__title
-		padding-left: 17px;
-		+title(64px, $link_nav);
+		padding-left: 17px
+		+title(64px, $link_nav)
+		@media screen and (max-width: 576px)
+			font:
+				size: 45px 
+			margin-bottom: 15px
+		@media screen and (min-width: 1500px)
+			font:
+				size: 70px 
+			margin-bottom: 0
 		span 
-			color: $title_end;
+			color: $title_end
+		@media screen and (min-width: 2000px)
+			font:
+				size: $title_size_lgg
 	.header__text
-		margin-top: -15px;
-		margin-left: 13px;
-		+text(18px, $link_nav);
+		margin-top: -15px
+		margin-left: 13px
+		+text(18px, $link_nav)
+		@media screen and (max-width: 576px)
+			font:
+				size: 14px 
+		@media screen and (min-width: 1500px)
+			font:
+				size: $text_size_lg
+		@media screen and (min-width: 2000px)
+			font:
+				size: $text_size_lgg
 	button	
-		+btn_round($bg_yellow, black, none, none, $btn_border_r);
-		margin-top: $tb_indent;
-		margin-left: 17px;
+		+btn_round($bg_yellow, black, none, none, $btn_border_r)
+		margin-top: $tb_indent
+		margin-left: 17px
 		font:
-			weight: 900;
-			size: 16px;
+			weight: 900
+			size: 16px
+		@media screen and (min-width: 1500px)
+			font:
+				size: $text_size_lg
+			padding: $btn_padding_lg
+			border-radius: $btn_border_r_lg
+		@media screen and (min-width: 2000px)
+			font:
+				size: $text_size_lgg
+			padding: $btn_padding_lgg
 
 .bas_regul a 
-	margin-top: 20px;
-	font-size: 16px;
-	i 
-		font-size: 18px;
+	margin-top: 20px
+	@media screen and (min-width: 2000px)
+		margin-top: 60px
 
 .block__image
 	img 
-		width: 480px;
+		width: 100%
 
 .see_more
-	color: $link_nav;
-	position: absolute;
-	bottom: 0px;
-	right: 20px;
+	color: $link_nav
+	position: absolute
+	bottom: 0px
+	right: 20px
 	&:hover
-		color: $link_nav;
+		color: $link_nav
+	@media screen and (min-width: 2000px)
+		bottom: 30px
+		right: 30px
 
 .block__image_closeup
-	padding: 0;
-	height: 500px;
+	padding: 0
+	height: 500px
 	img
-		width: 100%;
-		height: 100%;
+		width: 100%
+		height: 100%
 	video 
-		width: 100%;
-		height: 500px;
+		width: 100%
+		height: 500px
 
 .arr1:after
-	+triangle(left, $bg_color3, 20px);
-	position: relative;
-	top: -52%;
-	float: right;
+	+triangle(left, $bg_color3, 20px)
+	position: relative
+	top: -52%
+	float: right
+	@media screen and (min-width: 2000px)
+		+triangle(left, $bg_color3, 40px)
 
 .arr2:after
-	+triangle(right, $bg_color3, 20px);
-	position: relative;
-	top: -52%;
-	float: left;
+	+triangle(right, $bg_color3, 20px)
+	position: relative
+	top: -52%
+	float: left
+	@media screen and (min-width: 2000px)
+		+triangle(right, $bg_color3, 40px)
 
 .block__article
-	padding-top: 10px;
+	padding-top: 10px
 
 .article_title
-	+title(48px, $title_begin);
+	+title(48px, $title_begin)
 	span 
-		color: $title_end;
+		color: $title_end
+	@media screen and (min-width: 2000px)
+		font:
+			size: $title_size_lgg
 .article_text
-	+text(16px, $txt_color);
-	line-height: 2;
+	+text(16px, $txt_color)
+	line-height: 2
 	span
 		font:
-			weight: 600;
+			weight: 600
+	@media screen and (min-width: 2000px)
+		font:
+			size: $text_size_lgg
 .article_title_min
-	padding-top: 20px;
-	+title(30px, $title_begin);
+	padding-top: 20px
+	+title(30px, $title_begin)
 	span 
-		color: $title_end;
-
-input
-	&[type=search]
-		border-radius: $btn_border_r;
-		border: 1px solid $inp_border_color;
-		padding: 10px 15px;
-		outline: none;
-		+placeholder
-			font:
-				size: 16px;
-				weight: 100;
-				style: italic;
-			color: $inp_border_color;
+		color: $title_end
 
 .pad_right
-	padding-right: 20px;
+	padding-right: 20px
 
 .pad_left
-	margin-left: 20px;
+	padding-left: 20px
 
 .page-link
-	border: none;
-	background-color: inherit;
+	border: none
+	background-color: inherit
 	font:
-		size: 16px;
-		weight: 600;
+		size: $link_size
+		weight: 600
 	&:hover
-		outline: none;
-		box-shadow: none;
+		outline: none
+		box-shadow: none
 	&:active
-		outline: none;
-		box-shadow: none;
+		outline: none
+		box-shadow: none
 	&:focus
-		outline: none;
-		box-shadow: none;
+		outline: none
+		box-shadow: none
+	@media screen and (min-width: 2000px)
+		font-size: $link_size * 3
 
 .page-item
-	background-color: inherit;
+	background-color: inherit
 	&:hover
-		border: none;
-		outline: none;
-		box-shadow: none;
+		border: none
+		outline: none
+		box-shadow: none
 	&:active
-		border: none;
-		outline: none;
-		box-shadow: none;
+		border: none
+		outline: none
+		box-shadow: none
 	&:focus
-		outline: none;
-		box-shadow: none;
+		outline: none
+		box-shadow: none
 	&.active 
 		.page-link
-			background-color: inherit;
-			color: $title_end;
+			background-color: inherit
+			color: $title_end
 			font: 
-				size: 22px;
+				size: 22px
+			@media screen and (min-width: 2000px)
+				font-size: $link_size * 3
 
 .bg_head_tb
-	background: url(../img/head_tb.png)  no-repeat center;
-	background-size: 100% 100%;
-	padding: 20px 0 15px;
-	width: 100%;
+	background: url(../img/head_tb.png)  no-repeat center
+	background-size: 100% 100%
+	padding: 20px 0 15px
+	width: 100%
 	font:
-		family: $font_chunk;
-		size: 18px;
-	color: $link_nav;
+		family: $font_chunk
+		size: 18px
+	color: $link_nav
 
 .bg_body_tb
-	background-color: $bg_yellow;
-	width: 100%;
-	padding: $tb_indent 50px 10px;
+	background-color: $bg_yellow
+	width: 100%
+	padding: $tb_indent 50px 10px
 	.tb_item
-		color: $title_begin;
+		color: $title_begin
 		font: 
-			weight: 600;
-			size: 16px;
-		margin-bottom: $tb_indent;
+			family: $font_lato_b
+			weight: 600
+			size: 16px
+			style: normal
+		margin-bottom: $tb_indent
 		input[type="text"] 
-			margin-bottom: $tb_indent;
-			border: none;
-			background-color: inherit;
-			text-align: right;
+			margin-bottom: $tb_indent
+			border: none
+			background-color: inherit
+			text-align: right
 			+placeholder
-				color: $title_begin;
+				font:
+					family: $font_lato_b
+					size: 16px
+					weight: 600
+					style: normal
+				color: $title_begin
 		.drag
-			border: 3px dashed #E8E897;
-			width: 100%;
-			padding: $tb_indent 0;
-			background-color: #FBF6A3;
-			color: #E3D888;
-			cursor: default;
+			+drag(#E8E897, #FBF6A3, #E3D888, "Drag destination here")
+
+.drag
+ 	+drag($link_color_hvr, $link_color, $link_color_hvr, "Remove destination by dragging it here")
 
 .p_0
-	padding: 0;
+	padding: 0
+
+.p_1
+	padding-left: 20px
+	padding-right: 0
 
 .head_destin
-	padding-top: 20px;
-	color: $title_begin;
+	padding-top: 20px
+	color: $title_begin
 	font:
-		family: $font_chunk;
+		family: $font_chunk
 	h5:after
-		content: "";
-		display: block;
-		height: 3px;
-		width: 68px;
-		background-color: #29d9c2;
-		margin: 18px auto 30px auto;
+		content: ""
+		display: block
+		height: 3px
+		width: 68px
+		background-color: #29d9c2
+		margin: 18px auto 23px auto
+
+.body_destin
+	p 
+		color: $title_begin
+		font:
+			size: 16px
+			weight: 600
+	.dropdown
+		.btn-secondary.dropdown-toggle,.btn-secondary.dropdown-toggle:focus 
+			border: inherit
+			background: inherit
+			outline: inherit
+			box-shadow: none
+			color: $link_color
+			padding-top: 1px
+			&:hover
+				color: $link_color_hvr
+
+.destination
+	width: 100%
+	border: 1px solid $inp_border_color
+	border-radius: 4px
+	padding: 7.5px 15px
+	margin-top: 10px
+	.col 
+		padding: 0
+	p 
+		font:
+			size: $text_size
+			weight: 200
+		color: $link_color
+		margin: 0
+		span
+			color: $title_begin
+	h4
+		color: $link_color_hvr
+		margin: 0
+		font: 
+			weight: 100
+			family: $font_lato_l
+.destination:active
+	background: #efefef
+
+#droppable
+	min-width: 100%
+	min-height: 70px
+	.destination
+		box-shadow: 3px 3px 5px rgba(0,0,0,0.2)
+		img
+			width: 60px
+
+#droppable1, #droppable2
+	width: 100%
+	.destination
+		padding: 18.5px 13px
+		img
+			margin-right: 15px
+			width: 60px
+			height: 30px
+
+.drag_hover
+	+trans
+
+// .state_hover
+// 	+trans
+// 	margin-bottom: 20px
+
+.button_tb
+	text-align: right
+	margin-top: 45px
+	a 
+		i 
+			padding-right: 5px
+
+.button_green 
+	font:
+		size: $text_size
+		family: $font_lato_b
+	+btn_round($green_clr, $link_nav, none, none, $btn_border_r)	
+	@media screen and (min-width: 1500px)
+		border-radius: $btn_border_r_lg 
+
+.button_print
+	font:
+		size: $text_size
+		family: $font_lato_b
+	margin-left: 30px
+	+btn_round($title_begin, $link_nav, none, none, $btn_border_r)
+	@media screen and (min-width: 1500px)
+		border-radius: $btn_border_r_lg 
+
+.map 
+	position: relative
+	width: 100%
+	height: 0
+	.map_content
+		margin-right: $padd_edge
+		margin-left: $padd_edge
+		position: absolute
+		top: -$map_height
+		@media screen and (min-width: 1500px)
+			padding-right: $padd_edge_lg
+			padding-left:  $padd_edge_lg
+		@media screen and (min-width: 2000px)
+			padding-right: $padd_edge_lgg
+			padding-left: $padd_edge_lgg
+		.header_text
+			margin-top: 40px
+		.map_contact
+			margin-top: 90px
+			.map_tb
+				input, textarea
+					margin-bottom: 15px
+					font:
+						family: $font_lato_l
+						size: $text_size
+						weight: 100
+						style: italic
+					color: $inp_color
+					outline: none
+					box-shadow: none
+					&:focus
+						outline: none
+						box-shadow: none
+					+placeholder
+						font:
+							family: $font_lato_l
+							size: $text_size
+							weight: 100
+							style: italic
+						color: $inp_color
+				textarea
+					resize: none
+				textarea, input[type="email"]
+					width: 100%	
+				input[type="text"]
+					width: 45%
+					float: left
+					& + input[type="text"]
+						float: right
+				button
+					float: right
+					margin-top: 20px
+			.map_or, .map_info
+				p, a
+					font:
+						family: $font_lato_l
+						size: $text_size
+					color: $link_nav
+					line-height: 1
+					span
+						display: block
+						font:
+							size: 48px
+						line-height: 1
+						margin-bottom: 20px
+				a:hover
+					text-decoration: underline
+				i 
+					padding-right: 5px
+			.map_or
+				font:
+					weight: 600
+
+.map_sapce
+	height: $map_height
+
+.gm-style
+	opacity: 0.4
+
+.subscribe_logo
+	.subscribe_title
+		+title(60px, $link_nav)
+		margin-bottom: -10px
+	.subscribe_text
+		+text(16px, $link_nav)
+
+.subscribe_input
+	padding-top: 20px
+	input
+		width: 65%
+		padding: 40px 30px
+		white-space: nowrap
+		height: 86px
+		font:
+			family: $font_lato_l
+			size: 16px
+			weight: 100
+			style: italic
+		color: $inp_color
+		border-radius: 6px 0px 0px 6px
+		outline: none
+		box-shadow: none
+		&:focus
+			outline: none
+			box-shadow: none
+		+placeholder
+			font:
+				family: $font_lato_l
+				size: 18px
+				weight: 100
+				style: italic
+			color: $inp_color
+	button
+		width: 80px
+		height: 86px
+		background-color: $title_end
+		border: none
+		border-radius: 0px 6px 6px 0px
+		outline: none
+		i 
+			color: $link_nav
+			font: 
+				size: 40px
+				weight: 300
+		
+footer
+	background: #2F2933 url("../img/mountain.png")
+	background-size: 100% 100%
+	height: 270px
+	color: $footer_text
+	.block5
+		+block(none, 30px, 25px)
+		@media screen and (min-width: 1500px)
+			padding: $padd_edge_lg
+		@media screen and (min-width: 2000px)
+			padding: $padd_edge_lgg
+	ul 
+		li
+			color: $footer_text + #222
+			margin-left: 25px 
+			&:first-child
+				list-style: none
+				margin: 0
+			a 
+				font:
+					size: 12px
+				color: $footer_text - #222
+			a:hover
+				color: $footer_text - #222
+				text-decoration: underline
+	.copyright
+		height: 175px
+		padding-bottom: 5px
+		font:
+			size: 12px

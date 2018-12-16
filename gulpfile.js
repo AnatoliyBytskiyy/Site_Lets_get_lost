@@ -31,8 +31,9 @@ gulp.task('browser-sync', function() { // Создаем таск browser-sync
 gulp.task('scripts', function() {
 	return gulp.src([ // Берем все необходимые библиотеки
 		'sources/libs/jquery/dist/jquery.min.js', // Берем jQuery
+		'sources/libs/jquery/jquery-ui/jquery-ui.min.js', // Берем jQuery-ui
+		'sources/libs/popper/dist/umd/popper.min.js', // Берем popper
 		'sources/libs/bootstrap/dist/js/bootstrap.min.js', // Берем bootstrap
-		'sources/libs/jquery/Datepicker/js/jquery-ui-1.9.2.custom.min.js' // Берем Datepicker
 		])
 		.pipe(concat('libs.min.js')) // Собираем их в кучу в новом файле libs.min.js
 		.pipe(uglify()) // Сжимаем JS файл
@@ -40,9 +41,10 @@ gulp.task('scripts', function() {
 });
 
 gulp.task('css-libs', ['sass'], function() {
-	return gulp.src('sources/css/style.css') // Выбираем файл для минификации
+	return gulp.src(['sources/libs/jquery/jquery-ui/themes/base/jquery-ui.min.css',
+		'sources/css/style.css']) // Выбираем файл для минификации
+		.pipe(concat('libs.min.css'))
 		.pipe(cssnano()) // Сжимаем
-		.pipe(rename({suffix: '.min'})) // Добавляем суффикс .min
 		.pipe(gulp.dest('sources/css')); // Выгружаем в папку sources/css
 });
 
